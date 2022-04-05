@@ -11,6 +11,11 @@ class TestSkeleton
   # TestSkeleton.new.even_or_odd(-42) should return "even"
   def even_or_odd(number)
     # Your solution should be here
+    if number.even? == true
+      return "even"
+    else
+      return "odd"
+    end
   end
 
   # https://www.codewars.com/kata/5583090cbe83f4fd8c000051
@@ -22,6 +27,8 @@ class TestSkeleton
   # TestSkeleton.new.reverse_array(0) should return [0]
   def reverse_array(number)
     # Your solution should be here
+    temp = number.to_s.reverse
+    return temp.split('').map { |num| num.to_i }
   end
 
   # https://www.codewars.com/kata/554b4ac871d6813a03000035
@@ -37,6 +44,14 @@ class TestSkeleton
   # Output string must be two numbers separated by a single space, and highest number is first.
   def high_and_low(test_string)
     # Your solution should be here
+    array = []
+
+    test_string.split { |c| array << c.to_i }
+
+    max = array.max
+    min = array.min
+
+    return "#{max} #{min}"
   end
 
   # https://www.codewars.com/kata/5b16490986b6d336c900007d
@@ -50,46 +65,72 @@ class TestSkeleton
   # TestSkeleton.new.my_languages({"C++" => 50, "ASM" => 10, "Haskell" => 20}) should return [] 
   def my_languages(hash)
     # Your solution should be here
+    temp = hash.select { |k, v| v > 59 }
+    temp = temp.sort_by { |k, v| -v }
+    array = temp.collect { |k, v| k }
+    return array
   end
 
-  # https://www.codewars.com/kata/563089b9b7be03472d00002b
-  # Define a method/function that removes from a given array of integers all the values contained in a second array.
-  # Examples:
-  # integer_list =  [1, 1, 2 ,3 ,1 ,2 ,3 ,4]
-  # values_list = [1, 3]
-  # TestSkeleton.new.remove_array_elements(integer_list, values_list) should return [2, 2, 4]
-  # integer_list = [1, 1, 2 ,3 ,1 ,2 ,3 ,4, 4, 3 ,5, 6, 7, 2, 8]
-  # values_list = [1, 3, 4, 2]
-  # TestSkeleton.new.remove_array_elements(integer_list, values_list) should return [5, 6 ,7 ,8]
-  def remove_array_elements(source_array, values_array)
-    # Your solution should be here
-  end
+    # https://www.codewars.com/kata/563089b9b7be03472d00002b
+    # Define a method/function that removes from a given array of integers all the values contained in a second array.
+    # Examples:
+    # integer_list =  [1, 1, 2 ,3 ,1 ,2 ,3 ,4]
+    # values_list = [1, 3]
+    # TestSkeleton.new.remove_array_elements(integer_list, values_list) should return [2, 2, 4]
+    # integer_list = [1, 1, 2 ,3 ,1 ,2 ,3 ,4, 4, 3 ,5, 6, 7, 2, 8]
+    # values_list = [1, 3, 4, 2]
+    # TestSkeleton.new.remove_array_elements(integer_list, values_list) should return [5, 6 ,7 ,8]
+    def remove_array_elements(source_array, values_array)
+      # Your solution should be here
+      result = source_array - values_array
+      return result
+    end
 
-  # https://www.codewars.com/kata/5b39e91ee7a2c103300018b3
-  # Your task is to remove all consecutive duplicate words from a string,
-  # leaving only first words entries. Words would be separated by space
-  # Examples:
-  # string = "alpha beta beta gamma gamma gamma delta alpha beta beta gamma gamma gamma delta"
-  # TestSkeleton.new.consecutive_duplicates(string) should return "alpha beta gamma delta alpha beta gamma delta"
-  def consecutive_duplicates(string)
-    # Your solution should be here
-  end
+    # https://www.codewars.com/kata/5b39e91ee7a2c103300018b3
+    # Your task is to remove all consecutive duplicate words from a string,
+    # leaving only first words entries. Words would be separated by space
+    # Examples:
+    # string = "alpha beta beta gamma gamma gamma delta alpha beta beta gamma gamma gamma delta"
+    # TestSkeleton.new.consecutive_duplicates(string) should return "alpha beta gamma delta alpha beta gamma delta"
+    def consecutive_duplicates(string)
+      # Your solution should be here
+      string = string.split(" ")
 
-  # https://www.codewars.com/kata/56747fd5cb988479af000028
-  # You are going to be given a word. Your job is to return the middle character of the word.
-  # If the word's length is odd, return the middle character. If the word's length is even,
-  # return the middle 2 characters.
-  # Examples:
-  # TestSkeleton.new.middle_chars("test") should return "es"
-  # TestSkeleton.new.middle_chars("testing") should return "t"
-  # TestSkeleton.new.middle_chars("middle") should return "dd"
-  # TestSkeleton.new.middle_chars("A") should return "A"
-  # Input:
-  # A word (string) of length 0 < str < 1000
-  # You do not need to test for this.
-  # Output:
-  # The middle character(s) of the word represented as a string.
-  def middle_chars(test_string)
-    # Your solution should be here
-  end
+      new_arr = []
+      last_element = nil
+
+      string.each do |element|
+        if last_element != element
+          new_arr << element
+        end
+        last_element = element
+      end
+
+      return new_arr.join(" ")
+    end
+
+    # https://www.codewars.com/kata/56747fd5cb988479af000028
+    # You are going to be given a word. Your job is to return the middle character of the word.
+    # If the word's length is odd, return the middle character. If the word's length is even,
+    # return the middle 2 characters.
+    # Examples:
+    # TestSkeleton.new.middle_chars("test") should return "es"
+    # TestSkeleton.new.middle_chars("testing") should return "t"
+    # TestSkeleton.new.middle_chars("middle") should return "dd"
+    # TestSkeleton.new.middle_chars("A") should return "A"
+    # Input:
+    # A word (string) of length 0 < str < 1000
+    # You do not need to test for this.
+    # Output:
+    # The middle character(s) of the word represented as a string.
+    def middle_chars(test_string)
+      # Your solution should be here
+      if test_string.length.even?
+        return test_string[test_string.length / 2 - 1] + test_string[test_string.length / 2]
+      else
+        return test_string[test_string.length / 2]
+      end
+    end
 end
+
+
